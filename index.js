@@ -14,7 +14,7 @@ const updateLocalStorage = () => {
   localStorage.setItem('My Books', JSON.stringify(Localstoragebook));
 };
 
-function createListOfBooks(arr) {
+const createListOfBooks = (arr) => {
   let books = '';
   for (let i = 0; i < arr.length; i += 1) {
     let liClass = 'dark-bakcground';
@@ -26,7 +26,8 @@ function createListOfBooks(arr) {
                 `;
   }
   return books;
-}
+};
+
 const showBooks = () => {
   const listOfBooks = document.querySelector('.container');
   listOfBooks.innerHTML = `
