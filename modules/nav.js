@@ -1,9 +1,8 @@
-// Single page Part
 import {
   contactLink, listOfBooks, booksection, listLink, contactSection, addNewLink, titleBookOne,
 } from './variables.js';
 
-const pages = () => {
+const navigation = () => {
   listLink.addEventListener('click', (e) => {
     e.preventDefault();
     titleBookOne.style.display = 'block';
@@ -28,4 +27,5 @@ const pages = () => {
     titleBookOne.style.display = 'none';
   });
 };
-export default pages;
+
+export default navigation;
