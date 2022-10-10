@@ -1,20 +1,18 @@
-/* eslint-disable import/prefer-default-export */
 /* eslint-disable no-unused-vars */
-import { Book } from './modules/book-class.js';
-import { clearFields } from './modules/clear-fields.js';
+import Book from './modules/book-class.js';
+import clearFields from './modules/clear-fields.js';
 import { DateTime } from './modules/luxon.min.js';
+import pages from './modules/event.js';
 
 if (localStorage.getItem('My Books') === null) {
   localStorage.setItem('My Books', JSON.stringify([]));
 }
-
 const Localstoragebook = JSON.parse(localStorage.getItem('My Books'));
-
 const updateLocalStorage = () => {
   localStorage.setItem('My Books', JSON.stringify(Localstoragebook));
 };
 
-const createListOfBooks = (arr) => {
+function createListOfBooks(arr) {
   let books = '';
   for (let i = 0; i < arr.length; i += 1) {
     let liClass = 'dark-bakcground';
@@ -26,8 +24,7 @@ const createListOfBooks = (arr) => {
                 `;
   }
   return books;
-};
-
+}
 const showBooks = () => {
   const listOfBooks = document.querySelector('.container');
   listOfBooks.innerHTML = `
@@ -45,7 +42,7 @@ const addNewBook = (bookTitle, bookAuthor) => {
 };
 
 const removeBook = (i) => {
-  Localstoragebook.splice(i, 1);
+  Localstoragebook.splice(i);
   updateLocalStorage();
   showBooks();
   clearFields();
@@ -61,16 +58,6 @@ form.addEventListener('submit', (e) => {
 
 window.onload = showBooks();
 
-// ======== NAVIGATIONS =================
-
-const contactLink = document.querySelector('.contact-us');
-const listOfBooks = document.querySelector('.container');
-const booksection = document.querySelector('.add-book');
-const listLink = document.querySelector('.list');
-const contactSection = document.querySelector('.contact');
-const addNewLink = document.querySelector('.add-new');
-const titleBookOne = document.querySelector('.books-title');
-
 // ==== Luxon Date ====
 const showDate = document.querySelector('.our-date');
 const updateTime = () => {
@@ -79,27 +66,5 @@ const updateTime = () => {
 };
 setInterval(updateTime, 1000);
 
-// Single page Part
-listLink.addEventListener('click', (e) => {
-  e.preventDefault();
-  titleBookOne.style.display = 'block';
-  listOfBooks.style.display = 'block';
-  contactSection.style.display = 'none';
-  booksection.style.display = 'none';
-});
-
-addNewLink.addEventListener('click', (e) => {
-  e.preventDefault();
-  booksection.style.display = 'block';
-  listOfBooks.style.display = 'none';
-  contactSection.style.display = 'none';
-  titleBookOne.style.display = 'none';
-});
-
-contactLink.addEventListener('click', (e) => {
-  e.preventDefault();
-  booksection.style.display = 'none';
-  listOfBooks.style.display = 'none';
-  contactSection.style.display = 'block';
-  titleBookOne.style.display = 'none';
-});
+// single pages
+pages();
